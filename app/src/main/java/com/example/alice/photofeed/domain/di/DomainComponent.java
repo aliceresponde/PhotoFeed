@@ -1,7 +1,5 @@
 package com.example.alice.photofeed.domain.di;
 
-import com.example.alice.photofeed.PhotoFeedAppModule;
-
 import javax.inject.Singleton;
 
 import dagger.Component;

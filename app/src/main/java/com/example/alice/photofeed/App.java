@@ -1,9 +1,9 @@
 package com.example.alice.photofeed;
 
 import android.app.Application;
-import android.content.SharedPreferences;
 
 import com.example.alice.photofeed.domain.di.DomainModule;
+import com.example.alice.photofeed.domain.di.PhotoFeedAppModule;
 import com.firebase.client.Firebase;
 
 /**

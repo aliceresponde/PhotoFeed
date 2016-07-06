@@ -1,7 +1,9 @@
-package com.example.alice.photofeed;
+package com.example.alice.photofeed.domain.di;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.example.alice.photofeed.App;
 
 import javax.inject.Singleton;
 

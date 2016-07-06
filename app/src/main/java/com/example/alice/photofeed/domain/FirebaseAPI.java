@@ -126,7 +126,7 @@ public class FirebaseAPI {
             public void onError(FirebaseError firebaseError) {
                 listenerCallBack.onError(firebaseError);
             }
-        };
+        });
     }
 
     public void checkForSesion(FirebaseActionListenerCallBack listenerCallBack){
