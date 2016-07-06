@@ -7,11 +7,9 @@ public class LoginInteractorImpl implements LoginInteractor {
 
     private LoginRepository loginRepository;
 
-    public LoginInteractorImpl() {
-
-        loginRepository = new LoginRepositoryImpl();
+    public LoginInteractorImpl(LoginRepository loginRepository) {
+        this.loginRepository = loginRepository;
     }
-
 
     @Override
     public void doSignUp(String email, String password) {

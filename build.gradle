@@ -33,7 +33,7 @@ ext{
     buildToolsVersion = '23.0.3'
 
     supportLibraryVersion = '24.0.0'
-    playServicesLocationVersion = '8.4.0'
+    playServicesLocationVersion = '9.2.0'
 
 
     dbflowVersion = '3.0.0-beta4'
@@ -48,7 +48,7 @@ ext{
 
 
     firebaseClientVersion = '2.5.0'
-    firebaseAuthVersion = '9.0.2'
+    firebaseAuthVersion = '9.2.0'
     cludinaryVesrison = '1.1.2'
 
     eventbusVersion = '3.0.0'

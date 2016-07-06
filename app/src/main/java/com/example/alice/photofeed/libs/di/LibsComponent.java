@@ -1,7 +1,6 @@
 package com.example.alice.photofeed.libs.di;
 
-import com.example.alice.photofeed.domain.di.DomainModule;
-import com.example.alice.photofeed.domain.di.PhotoFeedAppModule;
+import com.example.alice.photofeed.domain.di.AppModule;
 
 import javax.inject.Singleton;
 
@@ -12,6 +11,6 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = {LibsModule.class , PhotoFeedAppModule.class})
+@Component(modules = {LibsModule.class , AppModule.class})
 public interface LibsComponent {
 }

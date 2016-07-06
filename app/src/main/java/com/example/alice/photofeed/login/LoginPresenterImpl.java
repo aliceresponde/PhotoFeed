@@ -19,6 +19,7 @@ public class LoginPresenterImpl implements LogingPresenter{
     private LoginInteractor loginInteractor;
     private static String TAG  = LoginPresenterImpl.class.getSimpleName();
 
+
     public LoginPresenterImpl(EventBus eventBus, LoginView loginView, LoginInteractor loginInteractor) {
         this.eventBus = eventBus;
         this.loginView = loginView;
@@ -27,24 +28,14 @@ public class LoginPresenterImpl implements LogingPresenter{
 
     @Override
     public void onCreate() {
-
-    }
-
-    @Override
-    public void onResume() {
         eventBus.register(this);
     }
 
-    @Override
-    public void onPause() {
-        eventBus.unregister(this);
-    }
 
     @Override
     public void onDestroy() {
+        eventBus.unregister(this);
         loginView = null;
-
-
     }
 
     @Override

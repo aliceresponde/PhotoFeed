@@ -2,8 +2,13 @@ package com.example.alice.photofeed;
 
 import android.app.Application;
 
+import com.example.alice.photofeed.domain.di.AppModule;
 import com.example.alice.photofeed.domain.di.DomainModule;
-import com.example.alice.photofeed.domain.di.PhotoFeedAppModule;
+import com.example.alice.photofeed.libs.di.LibsModule;
+import com.example.alice.photofeed.login.di.DaggerLoginComponent;
+import com.example.alice.photofeed.login.di.LoginComponent;
+import com.example.alice.photofeed.login.di.LoginModule;
+import com.example.alice.photofeed.login.ui.LoginView;
 import com.firebase.client.Firebase;
 
 /**
@@ -17,7 +22,7 @@ public class App extends Application {
     private final static String FIREBASE_URL = "https://photofeed-413db.firebaseio.com/";
 
 
-    private PhotoFeedAppModule photoModule;
+    private AppModule appModule;
     private DomainModule domainModule;
 
     @Override
@@ -28,7 +33,7 @@ public class App extends Application {
     }
 
     private void initModules() {
-        photoModule = new PhotoFeedAppModule(this);
+        appModule = new AppModule(this);
         domainModule = new DomainModule(FIREBASE_URL);
     }
 
@@ -46,9 +51,15 @@ public class App extends Application {
         return SHARED_PREFERENCES_NAME;
     }
 
-    public  String getFirebaseUrl() {
-        return FIREBASE_URL;
+    // regresar componente
+    public LoginComponent getLoginComponent(LoginView view){
+        return DaggerLoginComponent
+                .builder()
+                .appModule(appModule)
+                .domainModule(domainModule)
+                .libsModule( new LibsModule(null))
+                .loginModule( new LoginModule(view))
+                .build();
     }
-
 
 }

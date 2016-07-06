@@ -14,11 +14,11 @@ import dagger.Provides;
  * Created by alice on 7/5/16.
  */
 @Module
-public class PhotoFeedAppModule {
+public class AppModule {
 
     App app;
 
-    public PhotoFeedAppModule(App app) {
+    public AppModule(App app) {
         this.app = app;
     }
 

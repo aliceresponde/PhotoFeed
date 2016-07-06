@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,8 @@ import com.example.alice.photofeed.R;
 import com.example.alice.photofeed.login.LogingPresenter;
 import com.example.alice.photofeed.login.events.LoginEvent;
 import com.example.alice.photofeed.main.MainActivity;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,8 +41,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @BindView(R.id.layoutMainContainer)
     RelativeLayout layoutMainContainer;
 
-    private LogingPresenter presenter;
-    private SharedPreferences sharedPreferences;
+    @Inject
+     LogingPresenter presenter;
+    @Inject
+     SharedPreferences sharedPreferences;
     private App app;
 
     @Override
@@ -48,58 +53,16 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         app = (App) getApplication();
+        setupInjection();
 
-        presenter = new LogingPresenter() {
-            @Override
-            public void onCreate() {
-
-            }
-
-            @Override
-            public void onResume() {
-
-            }
-
-            @Override
-            public void onPause() {
-
-            }
-
-            @Override
-            public void onDestroy() {
-
-            }
-
-            @Override
-            public void validateLogin(String email, String password) {
-
-            }
-
-            @Override
-            public void registerNewUser(String email, String password) {
-
-            }
-
-            @Override
-            public void onEventMainThread(LoginEvent event) {
-
-            }
-        };
         presenter.onCreate();
-        presenter.validateLogin(null , null);
+//        presenter.validateLogin(null , null);
     }
 
-    @Override
-    protected void onResume() {
-        presenter.onResume();
-        super.onResume();
+    private void setupInjection() {
+        app.getLoginComponent(this).inject(this);
     }
 
-    @Override
-    protected void onPause() {
-        presenter.onPause();
-        super.onPause();
-    }
 
     @Override
     protected void onDestroy() {
@@ -140,12 +103,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @OnClick(R.id.btnSignInUp)
     @Override
     public void handleSignUp() {
+        Log.i("click", "handleSignUp");
         presenter.registerNewUser(inputEmail.getText().toString(), inputPassword.getText().toString());
     }
 
     @OnClick(R.id.btnSignin)
     @Override
     public void handleSignIn() {
+        Log.i("click", "handleSignIn");
         presenter.validateLogin(inputEmail.getText().toString(), inputPassword.getText().toString());
     }
 
@@ -183,9 +148,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                     .edit()
                     .putString(app.getEmailKey(),email)
                     .commit();
-
-
         }
-
     }
+
 }

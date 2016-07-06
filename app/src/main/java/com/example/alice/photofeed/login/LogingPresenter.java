@@ -8,8 +8,8 @@ import com.example.alice.photofeed.login.events.LoginEvent;
  */
 public interface LogingPresenter {
     void onCreate();
-    void onResume();
-    void onPause();
+//    void onResume();
+//    void onPause();
     void onDestroy();
 //    void checkForAuthenticationUser();   va en login
     void validateLogin(String email, String password);
