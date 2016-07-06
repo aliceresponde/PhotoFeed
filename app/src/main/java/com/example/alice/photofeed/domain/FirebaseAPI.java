@@ -114,7 +114,7 @@ public class FirebaseAPI {
         });
     }
 
-    private void signup(String email, String password, final FirebaseActionListenerCallBack listenerCallBack){
+    public void signup(String email, String password, final FirebaseActionListenerCallBack listenerCallBack){
         firebase.createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>(){
 
             @Override

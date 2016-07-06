@@ -18,19 +18,18 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            resValue "string", "CLOUDINARY_URL" , project.property('CLOUDINARY_URL');
-            resValue "string", "GOOGLEMAPS_API_KEY" , project.property('GOOGLEMAPS_API_KEY');
+            resValue "string", "CLOUDINARY_URL", project.property('CLOUDINARY_URL');
+            resValue "string", "GOOGLEMAPS_API_KEY", project.property('GOOGLEMAPS_API_KEY');
         }
 
-        debug{
-            resValue "string", "CLOUDINARY_URL" , project.property('CLOUDINARY_URL');
-            resValue "string", "GOOGLEMAPS_API_KEY" , project.property('GOOGLEMAPS_API_KEY');
+        debug {
+            resValue "string", "CLOUDINARY_URL", project.property('CLOUDINARY_URL');
+            resValue "string", "GOOGLEMAPS_API_KEY", project.property('GOOGLEMAPS_API_KEY');
         }
     }
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
 
     compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
@@ -60,5 +59,7 @@ dependencies {
 //    compile "com.github.Raizlabs.DBFlow:dbflow-core:$rootProject.ext.dbflowVersion"
 //    compile "com.github.Raizlabs.DBFlow:dbflow:$rootProject.ext.dbflowVersion"
 
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha3'
+    testCompile 'junit:junit:4.12'
 }
 
