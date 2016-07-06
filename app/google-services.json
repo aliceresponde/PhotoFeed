@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "629405040803",
+    "firebase_url": "https://photofeed-413db.firebaseio.com",
+    "project_id": "photofeed-413db",
+    "storage_bucket": "photofeed-413db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629405040803:android:f4963486011163ab",
+        "android_client_info": {
+          "package_name": "com.example.alice.photofeed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "629405040803-eb1ntgtmv5bei6205u4i83hb888m1sqc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.alice.photofeed",
+            "certificate_hash": "44FEEC680BBB7A55D2C10B98780B6CF211CD76BA"
+          }
+        },
+        {
+          "client_id": "629405040803-5v4c46k13r1gmuudlfhcc0lhgu0f7gfs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR4X5GgTl6qO3DbN2p_fS7_xtmybHWVN4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "629405040803-5v4c46k13r1gmuudlfhcc0lhgu0f7gfs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

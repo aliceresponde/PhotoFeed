@@ -1,0 +1,60 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.0-alpha3'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+//        classpath 'com.google.gms:google-services:3.0.0'
+
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+
+ext{
+    minSdkVersion = 16
+    targetSdkVersion = 24
+    compileSdkVersion = 24
+    buildToolsVersion = '23.0.3'
+
+    supportLibraryVersion = '24.0.0'
+    playServicesLocationVersion = '8.4.0'
+
+
+    dbflowVersion = '3.0.0-beta4'
+//    retrofitVersion = '2.1.0'
+//    facebookVersion ='4.13.2'
+
+
+    circleimageview = '2.0.0'
+    glideVersion = '3.7.0'
+    jsr250Version ='1.0'
+    daggerVersion = '2.0.1'
+
+
+    firebaseClientVersion = '2.5.0'
+    firebaseAuthVersion = '9.0.2'
+    cludinaryVesrison = '1.1.2'
+
+    eventbusVersion = '3.0.0'
+
+
+    butterknifeVersion = '8.0.1'
+    multidexVersion = '1.0.0'
+
+}
