@@ -19,7 +19,7 @@ public class App extends Application {
 
     private final static String EMAIL_KEY = "email";
     private final static String SHARED_PREFERENCES_NAME = "UserPrefs";
-    private final static String FIREBASE_URL = "https://photofeed-413db.firebaseio.com/";
+    private final static String FIREBASE_URL = "https://myphotofeededx.firebaseio.com/";
 
 
     private AppModule appModule;

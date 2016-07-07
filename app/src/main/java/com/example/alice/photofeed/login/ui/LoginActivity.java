@@ -15,8 +15,7 @@ import android.widget.RelativeLayout;
 import com.example.alice.photofeed.App;
 import com.example.alice.photofeed.R;
 import com.example.alice.photofeed.login.LogingPresenter;
-import com.example.alice.photofeed.login.events.LoginEvent;
-import com.example.alice.photofeed.main.MainActivity;
+import com.example.alice.photofeed.main.ui.MainActivity;
 
 import javax.inject.Inject;
 

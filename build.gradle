@@ -47,7 +47,7 @@ ext{
     daggerVersion = '2.0.1'
 
 
-    firebaseClientVersion = '2.5.0'
+    firebaseClientVersion = '2.5.2+'
     firebaseAuthVersion = '9.2.0'
     cludinaryVesrison = '1.1.2'
 

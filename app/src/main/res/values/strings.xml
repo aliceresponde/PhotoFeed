@@ -10,4 +10,14 @@
     <string name="loging.notice.signin">Usuario agregado exitosamente</string>
     <string name="login.error.unsuported_operation">Operation is not valid  in LoginActivity</string>
     <string name="login_notice_message_useradded">Usuario creado con exito</string>
+
+
+    <string name="main.title.phpto_list">Fotos</string>
+    <string name="main.title.map">Mapa</string>
+    <string name="main.notice.upload.init">Fotografía en proceso de publicación</string>
+    <string name="main.notice.upload.complete">Fotografía publicada exitosamente</string>
+    <string name="main.error.disparch.camera">Error al crear archivo </string>
+    <string name="main.menu.action.logout">Cerrar sesión</string>
+    <string name="main.message.picture.source">Seleccione una foto</string>
+
 </resources>

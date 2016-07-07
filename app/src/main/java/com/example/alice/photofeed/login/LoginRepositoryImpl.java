@@ -25,7 +25,7 @@ public class LoginRepositoryImpl implements LoginRepository {
 
             @Override
             public void onSuccess() {
-                postEvent(LoginEvent.onSignUpError);
+                postEvent(LoginEvent.onSignUpSuccess);
                 signIn(email,password);
             }
 
