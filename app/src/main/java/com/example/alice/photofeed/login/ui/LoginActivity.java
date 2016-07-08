@@ -56,7 +56,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
         presenter.onCreate();
         presenter.validateLogin(null, null);
-//        presenter.validateLogin(null , null);
     }
 
     private void setupInjection() {

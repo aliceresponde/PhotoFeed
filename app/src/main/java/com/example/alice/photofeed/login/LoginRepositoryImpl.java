@@ -61,7 +61,7 @@ public class LoginRepositoryImpl implements LoginRepository {
 
                 @Override
                 public void onError(FirebaseError error) {
-                    postEvent(LoginEvent.onFailedRecoverSession, error.getMessage(), null);
+                    postEvent(LoginEvent.onFailedRecoverSession);
 
                 }
             });
