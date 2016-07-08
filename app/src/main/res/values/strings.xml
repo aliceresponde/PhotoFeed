@@ -17,7 +17,11 @@
     <string name="main.notice.upload.init">Fotografía en proceso de publicación</string>
     <string name="main.notice.upload.complete">Fotografía publicada exitosamente</string>
     <string name="main.error.disparch.camera">Error al crear archivo </string>
+    <string name="main.error.location.not_available">Imposible obtener ubicación </string>
     <string name="main.menu.action.logout">Cerrar sesión</string>
     <string name="main.message.picture.source">Seleccione una foto</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

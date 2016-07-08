@@ -45,7 +45,6 @@ public class LoginPresenterImpl implements LogingPresenter{
             loginView.showProgress();
         }
         loginInteractor.doSignIn(email, password);
-
     }
 
     @Override

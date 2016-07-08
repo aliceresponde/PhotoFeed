@@ -2,14 +2,18 @@ package com.example.alice.photofeed.main.ui;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,8 +24,12 @@ import com.example.alice.photofeed.App;
 import com.example.alice.photofeed.R;
 import com.example.alice.photofeed.login.ui.LoginActivity;
 import com.example.alice.photofeed.main.MainPresenter;
+import com.example.alice.photofeed.main.PhotoListFragment;
+import com.example.alice.photofeed.main.PhotoMapFragment;
 import com.example.alice.photofeed.main.adapters.MainSectionsPagerAdapter;
+import com.example.alice.photofeed.main.events.MainEvent;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
@@ -41,7 +49,10 @@ public class MainActivity extends AppCompatActivity implements MainView,
 
     //    ======================MAPS ==================================
     GoogleApiClient apiClient;
-    Location laskKnownLocation; //get location
+    Location lastKnownLocation; //get location
+
+    private boolean resolvingError = false;
+    private static final int REQUEST_RESOLVE_ERROR = 0;
     private static final int PERMISSIONS_REQUEST_LOCATION = 1;
 
 //    =================INJECTABLES =================================================
@@ -68,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements MainView,
     }
 
     private void setupNavigation() {
-        String email = sharedPreferences.getString(app.getEmailKey(), getString(R.string.app_name));
+        String email = sharedPreferences.getString(app.getEmailKey(), "");
         toolbar.setTitle(email);
         setSupportActionBar(toolbar);
 
@@ -78,12 +89,52 @@ public class MainActivity extends AppCompatActivity implements MainView,
     }
 
     private void setupInjection() {
+
+        String[] titles = new String[]{ getString(R.string.main_title_phpto_list),
+                                        getString(R.string.main_title_map)
+                                      };
+
+        Fragment[] fragments = new Fragment[]{
+                                               new PhotoListFragment(),
+                                               new PhotoMapFragment()
+                                            };
+
+        adapter = new MainSectionsPagerAdapter( getSupportFragmentManager(), titles, fragments);
+        sharedPreferences = getSharedPreferences(app.getSharedPreferencesName(), MODE_PRIVATE);
+
+        presenter = new MainPresenter() {
+            @Override
+            public void onCreate() {
+
+            }
+
+            @Override
+            public void onDestroy() {
+
+            }
+
+            @Override
+            public void logout() {
+
+            }
+
+            @Override
+            public void uploadPhoto(Location location, String path) {
+
+            }
+
+            @Override
+            public void onEventMainThread(MainEvent event) {
+
+            }
+        };
     }
 
     /**
      * compare apiClient content -
      */
     private void setupGoogleAPIClient() {
+
         if (apiClient != null) {
             apiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
@@ -91,20 +142,25 @@ public class MainActivity extends AppCompatActivity implements MainView,
                     .addApi(LocationServices.API)
                     .build();
 
+            apiClient.connect();
         }
-
     }
 
     @Override
     protected void onStart() {
-        apiClient.connect();
         super.onStart();
+        if(apiClient != null) {
+            apiClient.connect();
+        }
     }
 
     @Override
     protected void onStop() {
-        apiClient.disconnect();
         super.onStop();
+
+        if(apiClient != null) {
+            apiClient.disconnect();
+        }
     }
 
     @Override
@@ -144,24 +200,63 @@ public class MainActivity extends AppCompatActivity implements MainView,
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSIONS_REQUEST_LOCATION);
+            }
 
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                    PERMISSIONS_REQUEST_LOCATION);
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        laskKnownLocation = LocationServices.FusedLocationApi.getLastLocation(apiClient);
+        if (LocationServices.FusedLocationApi.getLocationAvailability(apiClient).isLocationAvailable()) {
+            lastKnownLocation = LocationServices.FusedLocationApi.getLastLocation(apiClient);
+            Snackbar.make(viewPager, lastKnownLocation.toString(), Snackbar.LENGTH_SHORT).show();
+        } else {
+            Snackbar.make(viewPager, R.string.main_error_location_not_available, Snackbar.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_LOCATION: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (LocationServices.FusedLocationApi.getLocationAvailability(apiClient).isLocationAvailable()) {
+                        lastKnownLocation = LocationServices.FusedLocationApi.getLastLocation(apiClient);
+                    } else {
+                        Snackbar.make(viewPager, R.string.main_error_location_not_available, Snackbar.LENGTH_SHORT).show();
+                    }
+                }
+
+                return;
+            }
+        }
     }
 
     @Override
     public void onConnectionSuspended(int i) {
+        apiClient.connect();
+    }
 
+
+    /**
+     * Validatewe are  tring  to solve  the error
+     * @param connectionResult
+     */
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        if (resolvingError) {
+            return;
+        } else if (connectionResult.hasResolution()) {
+            resolvingError = true;
+            try {
+                connectionResult.startResolutionForResult(this, REQUEST_RESOLVE_ERROR);
+            } catch (IntentSender.SendIntentException e) {
+                e.printStackTrace();
+            }
+        } else {
+            resolvingError = true;
+            GoogleApiAvailability.getInstance().getErrorDialog(this, connectionResult.getErrorCode(), REQUEST_RESOLVE_ERROR).show();
+        }
     }
 
     @Override
@@ -181,10 +276,18 @@ public class MainActivity extends AppCompatActivity implements MainView,
 
     //    ========================================================================================
 
+
+
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_RESOLVE_ERROR) {
+            resolvingError = false;
+            if (resultCode == RESULT_OK) {
+                if (!apiClient.isConnecting() && !apiClient.isConnected()) {
+                    apiClient.connect();
+                }
+            }
+        }
     }
-
 }

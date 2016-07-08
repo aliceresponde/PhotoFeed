@@ -39,7 +39,6 @@ public class App extends Application {
 
     private void initFirebase() {
         Firebase.setAndroidContext(this);
-    
     }
 
 

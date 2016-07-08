@@ -2,6 +2,8 @@ package com.example.alice.photofeed.main;
 
 import android.location.Location;
 
+import com.example.alice.photofeed.main.events.MainEvent;
+
 /**
  * Created by alice on 7/7/16.
  */
