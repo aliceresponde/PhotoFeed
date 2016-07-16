@@ -15,30 +15,17 @@ public class LoginEvent {
     private String errorMessage;
     private String currentUserEmail;
 
-    public String getCurrentUserEmail() {
-        return currentUserEmail;
-    }
-
-    public void setCurrentUserEmail(String currentUserEmail) {
-        this.currentUserEmail = currentUserEmail;
-    }
-
     public int getEventType() {
         return eventType;
     }
 
-    public void setEventType(int eventType) {
+    public void setEventType(int eventType) {this.eventType = eventType;}
 
-        this.eventType = eventType;
-    }
+    public String getErrorMessage() { return errorMessage; }
 
-    public String getErrorMessage() {
+    public void setErrorMessage(String errorMessage) { this.errorMessage = errorMessage;}
 
-        return errorMessage;
-    }
+    public String getCurrentUserEmail() {return currentUserEmail;}
 
-    public void setErrorMessage(String errorMessage) {
-
-        this.errorMessage = errorMessage;
-    }
+    public void setCurrentUserEmail(String currentUserEmail) {this.currentUserEmail = currentUserEmail;}
 }

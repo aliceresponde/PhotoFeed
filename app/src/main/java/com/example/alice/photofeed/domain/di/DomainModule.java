@@ -14,7 +14,8 @@ import dagger.Provides;
 
 /**
  * Created by alice on 7/5/16.
- *
+ * FireBaseAPI
+ * FireBase
  */
 @Module
 public class DomainModule {
@@ -25,7 +26,7 @@ public class DomainModule {
         this.firebaseURL = firebaseURL;
     }
 
-//    ===================================FIREBASE ===================================
+//    =================================== FIREBASE ===================================
 
     @Provides
     @Singleton
@@ -45,7 +46,7 @@ public class DomainModule {
         return  new FirebaseAPI(firebase);
     }
 
-//    =============================UTIL================================================
+//    =============================UTIL   Geocoder=================================
 
     @Provides
     @Singleton

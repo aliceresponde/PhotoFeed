@@ -17,6 +17,9 @@ import dagger.Provides;
 
 /**
  * Created by alice on 7/5/16.
+ * Dagger  module
+ *  Presenter
+ *
  */
 @Module
 public class LoginModule {

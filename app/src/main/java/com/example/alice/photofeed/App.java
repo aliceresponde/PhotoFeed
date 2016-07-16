@@ -1,6 +1,8 @@
 package com.example.alice.photofeed;
 
 import android.app.Application;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 
 import com.example.alice.photofeed.domain.di.AppModule;
 import com.example.alice.photofeed.domain.di.DomainModule;
@@ -9,6 +11,10 @@ import com.example.alice.photofeed.login.di.DaggerLoginComponent;
 import com.example.alice.photofeed.login.di.LoginComponent;
 import com.example.alice.photofeed.login.di.LoginModule;
 import com.example.alice.photofeed.login.ui.LoginView;
+import com.example.alice.photofeed.main.di.DaggerMainComponent;
+import com.example.alice.photofeed.main.di.MainComponent;
+import com.example.alice.photofeed.main.di.MainModule;
+import com.example.alice.photofeed.main.ui.MainView;
 import com.firebase.client.Firebase;
 
 /**
@@ -21,9 +27,10 @@ public class App extends Application {
     private final static String SHARED_PREFERENCES_NAME = "UserPrefs";
     private final static String FIREBASE_URL = "https://myphotofeededx.firebaseio.com/";
 
-
+   // ===============Modules =============================================
     private AppModule appModule;
     private DomainModule domainModule;
+    //Libs module
 
     @Override
     public void onCreate() {
@@ -32,13 +39,13 @@ public class App extends Application {
         initModules();
     }
 
+    private void initFirebase() {
+        Firebase.setAndroidContext(this);
+    }
+
     private void initModules() {
         appModule = new AppModule(this);
         domainModule = new DomainModule(FIREBASE_URL);
-    }
-
-    private void initFirebase() {
-        Firebase.setAndroidContext(this);
     }
 
 
@@ -59,6 +66,22 @@ public class App extends Application {
                 .libsModule( new LibsModule(null))
                 .loginModule( new LoginModule(view))
                 .build();
+    }
+
+    /**
+     * constructor ----  MainView view, String[] titles, Fragment[] fragments, FragmentManager fragmentManager
+     * modules = {LoginModule.class, DomainModule.class, LibsModule.class, AppModule.class}
+     * @return
+     */
+    public MainComponent getMainComponet(MainView view, String[] titles, Fragment[] fragments, FragmentManager fragmentManager){
+        return DaggerMainComponent
+                .builder()
+                .appModule( appModule)
+                .domainModule(domainModule)
+                .libsModule(new LibsModule(null))
+                .mainModule( new MainModule (view, titles, fragments, fragmentManager))
+                .build();
+
     }
 
 }

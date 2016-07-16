@@ -11,10 +11,14 @@ import dagger.Component;
 
 /**
  * Created by alice on 7/6/16.
+ * DomainModile - FireBase API
+ * LoginModule
+ * Context - AppModule
+ * EventBus - LobsModule
  */
 @Singleton
 @Component(modules = {LoginModule.class, DomainModule.class, LibsModule.class, AppModule.class})
 public interface LoginComponent {
-    //target
+    //target LoginActivity
     void  inject(LoginActivity activity);
 }

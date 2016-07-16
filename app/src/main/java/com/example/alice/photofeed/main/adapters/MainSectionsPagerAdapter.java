@@ -18,7 +18,7 @@ public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    public android.support.v4.app.Fragment getItem(int position) {
+    public  Fragment  getItem(int position) {
         return this.fragments[position];
     }
 

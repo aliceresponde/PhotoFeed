@@ -40,7 +40,6 @@ public class ClaudinaryImageStorage implements ImageStorage {
                 }catch (IOException e){
                     lister.onError(e.getLocalizedMessage());
                 }
-
                 return null;
             }
 

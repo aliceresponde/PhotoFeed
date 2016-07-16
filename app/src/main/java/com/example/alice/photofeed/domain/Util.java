@@ -10,6 +10,9 @@ import java.util.List;
 
 /**
  * Created by alice on 7/5/16.
+ * Obtain avatar(url)
+ * Ontain  Address from  GeoPoint
+ *
  */
 
 public class Util {
@@ -48,13 +51,16 @@ public class Util {
         return result;
     }
 
-
-    private static final String md5(final String s) {
+    /**
+     * Grabatar  MD5 of Email
+     * @param email
+     * @return
+     */
+    private static final String md5(final String email) {
         final String MD5 = "MD5";
         try {
-            MessageDigest digest = java.security.MessageDigest
-                    .getInstance(MD5);
-            digest.update(s.getBytes());
+            MessageDigest digest = java.security.MessageDigest.getInstance(MD5);
+            digest.update(email.getBytes());
             byte mesaggeDigest[] = digest.digest();
 
             StringBuilder hexString = new StringBuilder();

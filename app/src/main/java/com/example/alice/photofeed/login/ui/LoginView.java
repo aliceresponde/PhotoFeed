@@ -18,6 +18,8 @@ public interface LoginView {
     void newUserSuccess();
     void newUserError(String error);
 
+
+//    ====================== Take email from repo ==================================
     void setUserEmail(String email);
 
 }

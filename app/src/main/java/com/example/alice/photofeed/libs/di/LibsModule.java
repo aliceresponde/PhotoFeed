@@ -3,7 +3,6 @@ package com.example.alice.photofeed.libs.di;
 
 
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 
@@ -11,7 +10,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.android.Utils;
-import com.example.alice.photofeed.domain.Util;
 import com.example.alice.photofeed.libs.ClaudinaryImageStorage;
 import com.example.alice.photofeed.libs.GlideImageLoader;
 import com.example.alice.photofeed.libs.GreenRobotsEventBus;
@@ -79,7 +77,7 @@ public class LibsModule {
         return  this.fragment;
     }
 
-//    ======================CLoudinary ================================================================
+//    ======================ImageStorage ================================================================
 
     @Provides
     @Singleton

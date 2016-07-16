@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Created by alice on 7/5/16.
+ * Data  to  save in FireBase
+ *
+ *
  */
 
 public class Photo {

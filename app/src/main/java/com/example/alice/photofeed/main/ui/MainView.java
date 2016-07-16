@@ -5,6 +5,6 @@ package com.example.alice.photofeed.main.ui;
  */
 public interface MainView {
     void onUploadInit(); //cuando se toma la foto
-    void onUploadComplete();
-    void onUploadError(String error);
+    void onUploadComplete(); // se publica
+    void onUploadError(String error); //error
 }

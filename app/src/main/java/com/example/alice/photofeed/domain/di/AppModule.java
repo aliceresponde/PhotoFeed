@@ -12,6 +12,7 @@ import dagger.Provides;
 
 /**
  * Created by alice on 7/5/16.
+ * Dagger module  Access to sharedPreferences, and application context
  */
 @Module
 public class AppModule {
@@ -22,12 +23,10 @@ public class AppModule {
         this.app = app;
     }
 
-
     @Provides @Singleton
     Context providesApplicationContext(){
         return app.getApplicationContext();
     }
-
 
     @Provides @Singleton App providesApp(){
         return app;

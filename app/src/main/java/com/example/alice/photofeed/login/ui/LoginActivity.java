@@ -40,10 +40,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @BindView(R.id.layoutMainContainer)
     RelativeLayout layoutMainContainer;
 
+//    ==================================INJECTED==================================================
     @Inject
      LogingPresenter presenter;
     @Inject
      SharedPreferences sharedPreferences;
+
     private App app;
 
     @Override

@@ -12,17 +12,21 @@ import java.util.Map;
 
 /**
  * Created by alice on 7/5/16.
- * Creo los obhetos de Firebase en esta clase, y voy a utilizar los callbacks  por quien lo mande a llamar
+ * Creo los objetos de Firebase en esta clase, y voy a utilizar los callbacks  por quien lo mande a llamar
  */
 
 public class FirebaseAPI {
     private Firebase firebase;
-    private ChildEventListener photoEventListeneer;
+    private ChildEventListener photoEventListener;
 
     public FirebaseAPI(Firebase firebase) {
         this.firebase = firebase;
     }
 
+    /**
+     * To  know  if  we  have data on FireBase
+     * @param listenerCallBacks
+     */
     public void  checkForData(final  FirebaseActionListenerCallBack listenerCallBacks){
         firebase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -41,9 +45,13 @@ public class FirebaseAPI {
         });
     }
 
+    /**
+     *
+     * @param   listenerCallBack - FirebaseEventListenerCallBack
+     */
     public void  subscribe(final FirebaseEventListenerCallBack listenerCallBack){
-        if (photoEventListeneer ==null){
-            photoEventListeneer = new ChildEventListener() {
+        if (photoEventListener ==null){
+            photoEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     listenerCallBack.onChildAdded(dataSnapshot);
@@ -68,16 +76,21 @@ public class FirebaseAPI {
                     listenerCallBack.onCancelled(firebaseError);
                 }
             };
-            firebase.addChildEventListener(photoEventListeneer);
+            firebase.addChildEventListener(photoEventListener);
         }
     }
 
     public void unSubscribe(){
-        if(photoEventListeneer != null) {
-            firebase.removeEventListener(photoEventListeneer);
+        if(photoEventListener != null) {
+            firebase.removeEventListener(photoEventListener);
         }
     }
 
+
+    /**
+     * KeyFrom Firebase, is used on cloudinary
+     * @return
+     */
     public String create(){
         return firebase.push().getKey();
     }
@@ -91,6 +104,7 @@ public class FirebaseAPI {
         listenerCallBack.onSuccess();
     }
 
+//    ===========================  Session=====================================================
     public String getAuthEmail(){
         String email  = null;
         if (firebase.getAuth() != null){
@@ -98,6 +112,18 @@ public class FirebaseAPI {
             email = providerData.get("email").toString();
         }
         return email;
+    }
+
+    /**
+     * Exist a session
+     * @param listenerCallBack
+     */
+    public void checkForSesion(FirebaseActionListenerCallBack listenerCallBack){
+        if (firebase.getAuth() != null){
+            listenerCallBack.onSuccess();
+        }else{
+            listenerCallBack.onError(null);
+        }
     }
 
     public void login(String email, String password , final FirebaseActionListenerCallBack listenerCallBack){
@@ -114,6 +140,12 @@ public class FirebaseAPI {
         });
     }
 
+    /**
+     * Create User
+     * @param email
+     * @param password
+     * @param listenerCallBack
+     */
     public void signup(String email, String password, final FirebaseActionListenerCallBack listenerCallBack){
         firebase.createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>(){
 
@@ -127,15 +159,6 @@ public class FirebaseAPI {
                 listenerCallBack.onError(firebaseError);
             }
         });
-    }
-
-    public void checkForSesion(FirebaseActionListenerCallBack listenerCallBack){
-        if (firebase.getAuth() != null){
-            listenerCallBack.onSuccess();
-        }else{
-            listenerCallBack.onError(null);
-        }
-
     }
 
     public void logout(){

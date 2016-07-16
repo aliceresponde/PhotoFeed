@@ -6,6 +6,6 @@ import android.location.Location;
  * Created by alice on 7/7/16.
  * Carga el archivo
  */
-public interface MainUploadInteractor {
+public interface UploadInteractor {
     void executeUploadImage(Location location, String path);
 }

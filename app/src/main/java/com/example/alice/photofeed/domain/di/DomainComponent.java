@@ -6,9 +6,15 @@ import dagger.Component;
 
 /**
  * Created by alice on 7/5/16.
+ * Interface
+ *
+ * Geocoder
+ *
  */
 
 @Singleton
 @Component(modules = {DomainModule.class, AppModule.class})
 public interface DomainComponent {
+
+
 }

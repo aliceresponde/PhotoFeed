@@ -21,12 +21,12 @@ public class LoginRepositoryImpl implements LoginRepository {
 
     @Override
     public void signUp(final String email, final String password) {
-        firebaseAPI.signup(email, password , new FirebaseActionListenerCallBack(){
+        firebaseAPI.signup(email, password, new FirebaseActionListenerCallBack() {
 
             @Override
             public void onSuccess() {
-                postEvent(LoginEvent.onSignUpSuccess);
-                signIn(email,password);
+                postEvent(LoginEvent.onSignUpSuccess, email);
+                signIn(email, password);
             }
 
             @Override
@@ -38,7 +38,7 @@ public class LoginRepositoryImpl implements LoginRepository {
 
     @Override
     public void signIn(final String email, String password) {
-        if (email != null && password != null){
+        if (email != null && password != null) {
             firebaseAPI.login(email, password, new FirebaseActionListenerCallBack() {
                 @Override
                 public void onSuccess() {
@@ -51,18 +51,17 @@ public class LoginRepositoryImpl implements LoginRepository {
                     postEvent(LoginEvent.onSignInError, error.getMessage(), null);
                 }
             });
-        }else{
+        } else {
             firebaseAPI.checkForSesion(new FirebaseActionListenerCallBack() {
                 @Override
                 public void onSuccess() {
-                    String email  = firebaseAPI.getAuthEmail();
+                    String email = firebaseAPI.getAuthEmail();
                     postEvent(LoginEvent.onSignInSuccess, email);
                 }
 
                 @Override
                 public void onError(FirebaseError error) {
                     postEvent(LoginEvent.onFailedRecoverSession);
-
                 }
             });
 
@@ -70,7 +69,7 @@ public class LoginRepositoryImpl implements LoginRepository {
     }
 
 
-    private void  postEvent(int type, String errorMessage, String currentUserEmail){
+    private void postEvent(int type, String errorMessage, String currentUserEmail) {
         LoginEvent event = new LoginEvent();
         event.setEventType(type);
         event.setErrorMessage(errorMessage);
@@ -78,11 +77,11 @@ public class LoginRepositoryImpl implements LoginRepository {
         eventBus.post(event);
     }
 
-    private void postEvent(int type){
+    private void postEvent(int type) {
         postEvent(type, null, null);
     }
 
-    private void postEvent(int type, String email){
+    private void postEvent(int type, String email) {
         postEvent(type, null, email);
     }
 }
