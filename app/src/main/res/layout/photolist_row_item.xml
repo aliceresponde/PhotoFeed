@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/appbar_padding_top">
+
+    <LinearLayout
+        android:id="@+id/layoutHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="@dimen/appbar_padding_top"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="@dimen/avatar_size_list"
+            android:layout_height="@dimen/avatar_size_list"
+            android:layout_marginRight="@dimen/appbar_padding_top"
+            app:civ_border_color="@android:color/black"
+            android:src="@mipmap/ic_launcher"
+            app:civ_border_width="1dp" />
+
+        <TextView
+            android:id="@+id/txtUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_EndOf="@+id/imgAvatar"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/imgAvatar"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="myemail@g.com"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/layoutHeader"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/txtPlaceAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgMain"
+        android:layout_centerHorizontal="true"
+        android:text="cra 45 # 4343434" />
+
+    <ImageButton
+        android:id="@+id/imgShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtPlaceAddress"
+        android:background="@android:color/transparent"
+        android:src="@android:drawable/ic_menu_share" />
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtPlaceAddress"
+        android:layout_toRightOf="@+id/imgShare"
+        android:background="@android:color/transparent"
+        android:src="@android:drawable/ic_menu_delete" />
+
+</RelativeLayout>
