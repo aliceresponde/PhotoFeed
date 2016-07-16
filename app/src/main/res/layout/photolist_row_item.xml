@@ -66,6 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtPlaceAddress"
+        android:id="@+id/imgDelete"
         android:layout_toRightOf="@+id/imgShare"
         android:background="@android:color/transparent"
         android:src="@android:drawable/ic_menu_delete" />

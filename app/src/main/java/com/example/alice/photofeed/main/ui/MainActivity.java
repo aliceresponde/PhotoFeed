@@ -27,15 +27,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.bumptech.glide.signature.MediaStoreSignature;
 import com.example.alice.photofeed.App;
 import com.example.alice.photofeed.R;
 import com.example.alice.photofeed.login.ui.LoginActivity;
 import com.example.alice.photofeed.main.MainPresenter;
-import com.example.alice.photofeed.main.PhotoListFragment;
-import com.example.alice.photofeed.main.PhotoMapFragment;
+import com.example.alice.photofeed.photolist.ui.PhotoListFragment;
+import com.example.alice.photofeed.PhotoMapFragment;
 import com.example.alice.photofeed.main.adapters.MainSectionsPagerAdapter;
-import com.example.alice.photofeed.main.events.MainEvent;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;

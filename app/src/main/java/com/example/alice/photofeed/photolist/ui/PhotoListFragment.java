@@ -1,4 +1,4 @@
-package com.example.alice.photofeed.main;
+package com.example.alice.photofeed.photolist.ui;
 
 
 import android.os.Bundle;
