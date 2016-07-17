@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/container"
-    tools:context=".map.PhotoMapFragment">
+    tools:context=".map.ui.PhotoMapFragment">
 
     <fragment
         android:layout_width="match_parent"
