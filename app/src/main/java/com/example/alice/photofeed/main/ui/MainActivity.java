@@ -16,6 +16,7 @@ import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -28,12 +29,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.alice.photofeed.App;
+import com.example.alice.photofeed.PhotoMapFragment;
 import com.example.alice.photofeed.R;
 import com.example.alice.photofeed.login.ui.LoginActivity;
 import com.example.alice.photofeed.main.MainPresenter;
-import com.example.alice.photofeed.photolist.ui.PhotoListFragment;
-import com.example.alice.photofeed.PhotoMapFragment;
 import com.example.alice.photofeed.main.adapters.MainSectionsPagerAdapter;
+import com.example.alice.photofeed.photolist.ui.PhotoListFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements MainView,
     Toolbar toolbar;
     @BindView(R.id.tabs)
     TabLayout tabs;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
 
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements MainView,
     private final static int REQUEST_PICTURE = 1;
     private String photoPath;
 
-//    =================INJECTABLES =================================================
+    //    =================INJECTABLES =================================================
     @Inject
     MainPresenter presenter;
     @Inject
@@ -125,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements MainView,
         };
 
         app.getMainComponet(this, titles, fragments, getSupportFragmentManager())
-            .inject(this);
+                .inject(this);
     }
 
 
@@ -175,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements MainView,
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Log.d("onActivityResult", "requestCode " + requestCode + " RESULT_CODE "+ resultCode);
+        Log.d("onActivityResult", "requestCode " + requestCode + " RESULT_CODE " + resultCode);
         if (requestCode == REQUEST_RESOLVE_ERROR) {
             resolvingError = false;
             if (resultCode == RESULT_OK) { //was solved
@@ -185,9 +188,6 @@ public class MainActivity extends AppCompatActivity implements MainView,
             }
         } else if (requestCode == REQUEST_PICTURE) {
             if (resultCode == RESULT_OK) {
-
-                Log.i("onActivityResult", "XXXXXXXXX");
-
                 // 1   -1
                 boolean fromCamera = (data == null || data.getData() == null);
                 if (fromCamera) {
@@ -196,13 +196,10 @@ public class MainActivity extends AppCompatActivity implements MainView,
                     photoPath = getRealPathFromURI(data.getData());
                 }
 
-                Log.i("onActivityResult", "photoPath:  "+  photoPath);
-
                 presenter.uploadPhoto(lastKnownLocation, photoPath);
             }
         }
     }
-
 
 //    =========================== Menu =============================================================
 
@@ -314,17 +311,16 @@ public class MainActivity extends AppCompatActivity implements MainView,
         showSnackBar(error);
     }
 
-    //    ========================================================================================
-
-
     //    ===================================Photo===============================================
     @OnClick(R.id.fab)
     public void takePicture() {
+        Log.d("oli", "FAV **************************************");
         Intent chooserIntent = null;
 
         List<Intent> intentList = new ArrayList<>();
+
         Intent pickIntent = new Intent(Intent.ACTION_PICK, //take picture
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI); //
+                                       MediaStore.Images.Media.EXTERNAL_CONTENT_URI); //
 
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra("return-data", true);
@@ -345,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements MainView,
 
         if (intentList.size() > 0) {
             chooserIntent = Intent.createChooser(intentList.remove(intentList.size() - 1),
-                    getString(R.string.main_message_picture_source));
+                                                 getString(R.string.main_message_picture_source));
             chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentList.toArray(new Parcelable[]{}));
         }
 
@@ -353,13 +349,11 @@ public class MainActivity extends AppCompatActivity implements MainView,
         if (chooserIntent != null) {
             startActivityForResult(chooserIntent, REQUEST_PICTURE);
         }
-
-        //add intents
-        //generar  archivos
     }
 
     /**
      * Generates File, .jpg inside pictures directory
+     *
      * @return
      */
     private File getFile() {
@@ -459,7 +453,7 @@ public class MainActivity extends AppCompatActivity implements MainView,
     }
 
     private void addToGalery() {
-        Log.i("MainAct","addToGalery");
+        Log.i("MainAct", "addToGalery");
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         File file = new File(photoPath);
         Uri contetnUri = Uri.fromFile(file);

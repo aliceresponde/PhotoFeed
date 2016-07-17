@@ -176,6 +176,6 @@ public class PhotoListFragment extends Fragment implements  PhotoListView , OnIt
 
     @Override
     public void onDeleteClick(Photo photo) {
-
+        presenter.onRemove(photo);
     }
 }
