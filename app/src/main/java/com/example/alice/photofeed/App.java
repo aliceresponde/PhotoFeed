@@ -15,6 +15,12 @@ import com.example.alice.photofeed.main.di.DaggerMainComponent;
 import com.example.alice.photofeed.main.di.MainComponent;
 import com.example.alice.photofeed.main.di.MainModule;
 import com.example.alice.photofeed.main.ui.MainView;
+import com.example.alice.photofeed.photolist.di.DaggerPhotoListComponent;
+import com.example.alice.photofeed.photolist.di.PhotoListComponent;
+import com.example.alice.photofeed.photolist.di.PhotoListModule;
+import com.example.alice.photofeed.photolist.ui.PhotoListFragment;
+import com.example.alice.photofeed.photolist.ui.PhotoListView;
+import com.example.alice.photofeed.photolist.ui.adapters.OnItemClickListener;
 import com.firebase.client.Firebase;
 
 /**
@@ -82,6 +88,23 @@ public class App extends Application {
                 .mainModule( new MainModule (view, titles, fragments, fragmentManager))
                 .build();
 
+    }
+
+    /**
+     * PhotoListView view, OnItemClickListener onItemClickListener
+     * modules = {PhotoListModule.class, DomainModule.class, LibsModule.class, AppModule.class}
+     *
+     * Note :  Required a fragment, to use in libs
+     * @return
+     */
+    public PhotoListComponent getPhotoListComponente(PhotoListFragment fragment, PhotoListView view, OnItemClickListener onItemClickListener){
+        return DaggerPhotoListComponent
+                .builder()
+                .appModule(appModule)
+                .domainModule(domainModule)
+                .libsModule( new LibsModule(fragment))
+                .photoListModule( new PhotoListModule(view, onItemClickListener))
+                .build();
     }
 
 }

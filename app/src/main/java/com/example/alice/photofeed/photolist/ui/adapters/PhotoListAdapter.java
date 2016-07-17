@@ -112,7 +112,7 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.View
             txtPlaceAddress.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onDeleteClick(photo);
+                    listener.onPlaceClick(photo);
                 }
             });
 

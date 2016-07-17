@@ -12,7 +12,7 @@ public class PhotoListEvent {
     String error;
 
     public final static int READ_EVENT= 0 ;
-    public final static int DELETE_EVENT= 1w ;
+    public final static int DELETE_EVENT= 1 ;
 
 
     public int getType() {

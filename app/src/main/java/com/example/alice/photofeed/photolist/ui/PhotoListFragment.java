@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
+import com.example.alice.photofeed.App;
 import com.example.alice.photofeed.R;
 import com.example.alice.photofeed.entities.Photo;
 import com.example.alice.photofeed.photolist.PhotoListPresenter;
@@ -49,9 +50,9 @@ public class PhotoListFragment extends Fragment implements  PhotoListView , OnIt
 //    ================Inject =============================
     @Inject
     PhotoListAdapter adapter;
-
     @Inject
     PhotoListPresenter presenter;
+    private App app;
 
     /**
      * did not  require body   because is created dynacally
@@ -68,6 +69,9 @@ public class PhotoListFragment extends Fragment implements  PhotoListView , OnIt
     }
 
     private void setupInjection() {
+        app = (App) getActivity().getApplication();
+        app.getPhotoListComponente(this, this, this)
+                .inject(this);
     }
 
 

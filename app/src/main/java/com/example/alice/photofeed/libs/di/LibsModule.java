@@ -1,10 +1,8 @@
 package com.example.alice.photofeed.libs.di;
 
 
-
-
-import android.app.Fragment;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;

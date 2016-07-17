@@ -57,6 +57,23 @@ public class MainModule {
         return new MainPresenterImp(view, eventBus, uploadInteractor, sesionInteractor);
     }
 
+    @Provides
+    @Singleton
+    UploadInteractor providesUploadInteractor(MainRepository repository){
+        return  new UploadInteractorImp( repository );
+    }
+
+    @Provides
+    @Singleton
+    SesionInteractor providesSesionInteractor(MainRepository repository){
+        return  new SesionInteractorImp(repository);
+    }
+
+    @Provides
+    @Singleton
+    MainRepository providesMainRepository(EventBus eventBus, FirebaseAPI firebaseAPI, ImageStorage imageStorage){
+        return  new MainRepositoryImp(eventBus, firebaseAPI, imageStorage);
+    }
 
 //    ================================MainSectionsPagerAdapter======================================
     @Provides
@@ -64,7 +81,6 @@ public class MainModule {
     MainSectionsPagerAdapter providesMainSectionsPagerAdapter(android.support.v4.app.FragmentManager fm, String[] titles, android.support.v4.app.Fragment[] fragments){
         return  new MainSectionsPagerAdapter(fm, titles, fragments);
     }
-
 
     @Provides
     @Singleton
@@ -84,25 +100,4 @@ public class MainModule {
         return titles;
     }
 
-
-
-
-//    ========================  Sesion/UploadInteractor ==================================================
-    @Provides
-    @Singleton
-    UploadInteractor providesUploadInteractor(MainRepository repository){
-        return  new UploadInteractorImp( repository );
-    }
-
-    @Provides
-    @Singleton
-    SesionInteractor providesSesionInteractor(MainRepository repository){
-        return  new SesionInteractorImp(repository);
-    }
-
-    @Provides
-    @Singleton
-    MainRepository providesMainRepository(EventBus eventBus, FirebaseAPI firebaseAPI, ImageStorage imageStorage){
-        return  new MainRepositoryImp(eventBus, firebaseAPI, imageStorage);
-    }
 }
