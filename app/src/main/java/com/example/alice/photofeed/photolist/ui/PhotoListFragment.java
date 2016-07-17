@@ -161,6 +161,7 @@ public class PhotoListFragment extends Fragment implements  PhotoListView , OnIt
     @Override
     public void onShareClick(Photo photo, ImageView img) {
         Bitmap bitmap = ((GlideBitmapDrawable) img.getDrawable()).getBitmap();
+        
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("image/jpeg");
 

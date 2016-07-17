@@ -29,7 +29,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.alice.photofeed.App;
-import com.example.alice.photofeed.PhotoMapFragment;
+import com.example.alice.photofeed.map.PhotoMapFragment;
 import com.example.alice.photofeed.R;
 import com.example.alice.photofeed.login.ui.LoginActivity;
 import com.example.alice.photofeed.main.MainPresenter;

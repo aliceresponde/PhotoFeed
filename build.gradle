@@ -33,7 +33,7 @@ ext{
     buildToolsVersion = '23.0.3'
 
     supportLibraryVersion = '24.0.0'
-    playServicesLocationVersion = '9.2.0'
+    playServicesLocationVersion = '9.2.1'
 
 
     dbflowVersion = '3.0.0-beta4'
