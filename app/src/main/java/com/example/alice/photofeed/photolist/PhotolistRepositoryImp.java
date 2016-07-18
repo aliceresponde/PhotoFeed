@@ -47,7 +47,6 @@ public class PhotolistRepositoryImp implements  PhotolistRepository {
                 String emial = firebaseAPI.getAuthEmail();
                 boolean publishedByMe = photo.getEmail().equals(emial);
                 photo.setPublishedByMe(publishedByMe);
-
                 post(PhotoListEvent.READ_EVENT, photo);
             }
 
