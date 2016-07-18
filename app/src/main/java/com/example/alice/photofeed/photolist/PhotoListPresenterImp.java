@@ -46,8 +46,10 @@ public class PhotoListPresenterImp implements PhotoListPresenter {
         String error = event.getError();
         if (error!=null){
             if (error.isEmpty()){
+                view.hideProgress();
                 view.onPhotoError(EMPTY_LIST);
             }else {
+                view.hideProgress();
                 view.onPhotoError(error);
             }
 
