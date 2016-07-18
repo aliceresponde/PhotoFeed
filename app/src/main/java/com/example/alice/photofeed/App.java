@@ -15,6 +15,11 @@ import com.example.alice.photofeed.main.di.DaggerMainComponent;
 import com.example.alice.photofeed.main.di.MainComponent;
 import com.example.alice.photofeed.main.di.MainModule;
 import com.example.alice.photofeed.main.ui.MainView;
+import com.example.alice.photofeed.map.di.DaggerPhotoMapComponent;
+import com.example.alice.photofeed.map.di.PhotoMapComponent;
+import com.example.alice.photofeed.map.di.PhotoMapModule;
+import com.example.alice.photofeed.map.ui.PhotoMapFragment;
+import com.example.alice.photofeed.map.ui.PhotoMapView;
 import com.example.alice.photofeed.photolist.di.DaggerPhotoListComponent;
 import com.example.alice.photofeed.photolist.di.PhotoListComponent;
 import com.example.alice.photofeed.photolist.di.PhotoListModule;
@@ -65,6 +70,7 @@ public class App extends Application {
 
     // regresar componente
     public LoginComponent getLoginComponent(LoginView view){
+//        return null;
         return DaggerLoginComponent
                 .builder()
                 .appModule(appModule)
@@ -80,12 +86,13 @@ public class App extends Application {
      * @return
      */
     public MainComponent getMainComponet(MainView view, String[] titles, Fragment[] fragments, FragmentManager fragmentManager){
+//        return null;
         return DaggerMainComponent
                 .builder()
                 .appModule( appModule)
                 .domainModule(domainModule)
                 .libsModule(new LibsModule(null))
-                .mainModule( new MainModule (view, titles, fragments, fragmentManager))
+                .mainModule( new MainModule(view, titles, fragments, fragmentManager))
                 .build();
 
     }
@@ -98,6 +105,7 @@ public class App extends Application {
      * @return
      */
     public PhotoListComponent getPhotoListComponente(PhotoListFragment fragment, PhotoListView view, OnItemClickListener onItemClickListener){
+//        return null;
         return DaggerPhotoListComponent
                 .builder()
                 .appModule(appModule)
@@ -107,4 +115,14 @@ public class App extends Application {
                 .build();
     }
 
+    public PhotoMapComponent getPhotoMapComponent(PhotoMapFragment fragment, PhotoMapView view) {
+//     return  null;
+        return DaggerPhotoMapComponent
+                .builder()
+                .appModule(appModule)
+                .domainModule(domainModule)
+                .libsModule( new LibsModule(fragment))
+                .photoMapModule( new PhotoMapModule(view))
+                .build();
+    }
 }
